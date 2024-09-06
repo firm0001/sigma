@@ -2,7 +2,22 @@ local Modules = {}
 local connections = {}
 
 local repo = 'https://raw.githubusercontent.com/firm0001/sigma/main/'
-local Utilities = loadstring(game:HttpGet(repo .. "utils/utilities.lua"))()
+local Utilities = {}
+Utilities.Events = {
+    RenderStepped = RunService.RenderStepped,
+    Heartbeat = RunService.Heartbeat,
+    Stepped = RunService.Stepped,
+    PlayerAdded = Players.PlayerAdded,
+    PlayerRemoving = Players.PlayerRemoving,
+    Chatted = LocalPlayer.Chatted,
+    ChildAdded = Workspace.ChildAdded,
+    DescendantAdded = Workspace.DescendantAdded,
+    IgnoredDescendantAdded = Workspace.Ignored.DescendantAdded,
+    InputBegan = UserInputService.InputBegan,
+    InputEnded = UserInputService.InputEnded,
+    ReplicatedStorageChildAdded = ReplicatedStorage.ChildAdded,
+    ReplicatedStorageDescendantAdded = ReplicatedStorage.DescendantAdded
+}
 local Error = loadstring(game:HttpGet(repo .. "utils/error.lua"))()
 
 function Modules:New(class, properties)
