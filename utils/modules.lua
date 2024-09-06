@@ -1,8 +1,12 @@
 local Modules = {}
 local connections = {}
 
-function Modules:New(className, properties)
-    local instance = Instance.new(className)
+local repo = 'https://raw.githubusercontent.com/firm0001/sigma/main/'
+local Utilities = loadstring(game:HttpGet(repo .. "utils/utilities.lua"))()
+local Error = loadstring(game:HttpGet(repo .. "utils/error.lua"))()
+
+function Modules:New(class, properties)
+    local instance = Instance.new(class)
     if properties then
         for key, value in pairs(properties) do
             instance[key] = value
