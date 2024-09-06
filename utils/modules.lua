@@ -1,4 +1,5 @@
 local Modules = {}
+local connections = {}
 
 function Modules:New(className, properties)
     local instance = Instance.new(className)
@@ -13,7 +14,7 @@ end
 function Modules:Connect(eventname, callback, id)
     local event = Utilities.Event[eventname]
     if not event then 
-        return Error:Log("Event '" .. eventname .. "' does not exist.") 
+        return Error:Log("Event '" .. eventname .. "' does not exist.", "error")
     end
 
     local success, connection
@@ -22,13 +23,13 @@ function Modules:Connect(eventname, callback, id)
     elseif typeof(event) == "Instance" and (event:IsA("BindableEvent") or event:IsA("Changed")) then
         success, connection = pcall(function() return event.Event:Connect(callback) end)
     else
-        return Error:Log("Unsupported event type: '" .. eventname .. "'")
+        return Error:Log("Unsupported event type: '" .. eventname .. "'", "error")
     end
 
     if success and connection then
         connections[id] = connection
     else
-        Error:Log("Failed to establish connection for '" .. eventname .. "'")
+        Error:Log("Failed to establish connection for '" .. eventname .. "'", "error")
     end
 end
 
