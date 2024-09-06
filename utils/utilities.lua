@@ -1,4 +1,4 @@
-Utilities = {}
+local Utilities = {}
 Utilities.Events = {
     RenderStepped = RunService.RenderStepped,
     Heartbeat = RunService.Heartbeat,
